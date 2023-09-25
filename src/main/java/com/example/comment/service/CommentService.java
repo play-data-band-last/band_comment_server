@@ -44,6 +44,35 @@ public class CommentService {
         comment.setContent(request.getContent());
     }
 
+    @Transactional
+    public void updateCommentMember(UserUpdateRequest userUpdateRequest) throws Exception {
+        if (userUpdateRequest.getMemberImage() != null && userUpdateRequest.getMemberName() != null) {
+            commentRepository.updateCommentMemberImageAndMemberName(userUpdateRequest.getMemberName(), userUpdateRequest.getMemberImage(), userUpdateRequest.getMemberId());
+        } else if (userUpdateRequest.getMemberImage() != null && userUpdateRequest.getMemberName() == null) {
+            commentRepository.updateCommentMemberImage(userUpdateRequest.getMemberImage(), userUpdateRequest.getMemberId());
+        } else if (userUpdateRequest.getMemberImage() == null && userUpdateRequest.getMemberName() != null) {
+            commentRepository.updateCommentMemberName(userUpdateRequest.getMemberName(), userUpdateRequest.getMemberId());
+        } else {
+            throw new Exception("NULL REQUEST");
+        }
+    }
+
+
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

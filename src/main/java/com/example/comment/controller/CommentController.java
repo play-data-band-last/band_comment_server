@@ -36,4 +36,9 @@ public class CommentController {
                               @RequestBody CommentRequest request) {
         commentService.updateComment(commentId, request);
     }
+
+    @PutMapping("/updateMember")
+    public void updateMember(@RequestBody UserUpdateRequest request) throws Exception {
+        commentService.updateCommentMember(request);
+    }
 }
