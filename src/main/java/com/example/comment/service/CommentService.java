@@ -2,6 +2,7 @@ package com.example.comment.service;
 
 
 import com.example.comment.domain.entity.Comment;
+import com.example.comment.domain.request.AlbumUpdateRequest;
 import com.example.comment.domain.request.CommentRequest;
 import com.example.comment.domain.request.UserUpdateRequest;
 import com.example.comment.repository.CommentRepository;
@@ -44,6 +45,21 @@ public class CommentService {
         comment.setContent(request.getContent());
     }
 
+    @Transactional
+    public void updateCommentMember(AlbumUpdateRequest albumUpdateRequest) throws Exception {
+        if (albumUpdateRequest.getMemberImage() != null && albumUpdateRequest.getMemberName() !=null ){
+            commentRepository.updateBoardMemberImageAndMemberName(albumUpdateRequest.getMemberName(), albumUpdateRequest.getMemberImage(), albumUpdateRequest.getMemberId());
+
+        } else if (albumUpdateRequest.getMemberImage()!=null && albumUpdateRequest.getMemberName() ==null) {
+            commentRepository.updateBoardMemberImage(albumUpdateRequest.getMemberImage(),albumUpdateRequest.getMemberId());
+
+        } else if (albumUpdateRequest.getMemberImage()==null && albumUpdateRequest.getMemberName() != null) {
+            commentRepository.updateBoardMemberName(albumUpdateRequest.getMemberName(), albumUpdateRequest.getMemberId());
+
+        } else {
+            throw new Exception("NULL REQUEST");
+        }
+    }
 
 
 }
