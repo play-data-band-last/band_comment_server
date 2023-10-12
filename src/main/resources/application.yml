@@ -2,7 +2,7 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
       group-id: album
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
@@ -15,7 +15,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/comment?serverTimezone=Asia/Seoul
     username: root
-    password: 1234
+    password: 1q2w3e4r!!
   jpa:
     hibernate:
       ddl-auto: update

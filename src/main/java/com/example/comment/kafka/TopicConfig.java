@@ -6,4 +6,7 @@ import org.springframework.stereotype.Component;
 public class TopicConfig {
     public final static String memberUpdate = "memberUpdate";
 
+    public final static String memberDelete = "memberDelete";
+
+
 }

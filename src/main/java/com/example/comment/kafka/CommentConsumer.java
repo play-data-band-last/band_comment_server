@@ -16,14 +16,22 @@ public class CommentConsumer {
 
     @RetryableTopic
     @KafkaListener(topics = TopicConfig.memberUpdate)
-    public void listen(AlbumUpdateRequest albumUpdateRequest) throws Exception {
+    public void MemberUpdateListen(AlbumUpdateRequest albumUpdateRequest) throws Exception {
+
         commentService.updateCommentMember(albumUpdateRequest);
+    }
+
+    @RetryableTopic
+    @KafkaListener(topics = TopicConfig.memberDelete)
+    public void memberDeleteListenr(Long userId) throws Exception {
+        commentService.userDelteHandler(userId);
     }
 
     @DltHandler
     public void processDltMessage(String dltMessage) {
         // DLT 토픽에서 메시지를 처리합니다. (예: 로깅 또는 추가 조사)
         System.out.println("DLT에서 메시지 수신: " + dltMessage);
+
     }
 
 

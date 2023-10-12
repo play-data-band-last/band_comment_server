@@ -1,9 +1,6 @@
 package com.example.comment.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -12,15 +9,17 @@ import java.util.UUID;
 @Getter @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "comments")
+@Table(name = "comments", indexes = @Index(name = "boardId", columnList = "targetId"))
+
 public class Comment {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
     private UUID targetId;
     private Long memberId;
     private String memberImage;
     private String memberName;
+    private Boolean isValid = Boolean.TRUE;
 
 }

@@ -61,5 +61,13 @@ public class CommentService {
         }
     }
 
+    @Transactional
+    public void userDelteHandler(Long userId){
+        Comment comment = commentRepository.findByMemberId(userId).get();
+        comment.setIsValid(Boolean.FALSE);
+    }
+
+
+
 
 }

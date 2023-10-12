@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
@@ -31,5 +32,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
             "where b.memberId = :memberId")
     void updateBoardMemberImageAndMemberName(@Param("memberName") String memberName, @Param("memberImage") String memberImage, @Param("memberId") Long memberId);
 
-
+    Optional<Comment> findByMemberId(Long userId);
 }
