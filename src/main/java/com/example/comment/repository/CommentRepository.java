@@ -37,4 +37,11 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     void updateBoardMemberImageAndMemberName(@Param("memberName") String memberName, @Param("memberImage") String memberImage, @Param("memberId") Long memberId);
 
     Optional<Comment> findByMemberId(Long userId);
+
+    @Modifying
+    @Query("update Comment c " +
+            "set c.isValid = false " +
+            "where c.memberId = :memberId")
+    void memberDelete(@Param("memberId") Long userId);
+
 }
