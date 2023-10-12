@@ -11,6 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
+    @Query("select c " +
+            "from Comment c " +
+            "where c.targetId = :targetId " +
+            "and c.isValid = True")
     List<Comment> findAllByTargetId(UUID targetId);
 
     @Modifying
