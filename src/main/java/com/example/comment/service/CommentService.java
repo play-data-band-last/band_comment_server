@@ -67,6 +67,10 @@ public class CommentService {
         comment.setIsValid(Boolean.FALSE);
     }
 
+    @Transactional
+    public void delteteByCommentId(Long commentId){
+        commentRepository.deleteById(commentId);
+    }
 
 
 
