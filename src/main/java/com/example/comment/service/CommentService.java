@@ -20,6 +20,7 @@ public class CommentService {
 
     public void save(CommentRequest request) {
         Comment comment = Comment.builder()
+                .id(null)
                 .content(request.getContent())
                 .memberName(request.getMemberName())
                 .memberImage(request.getMemberImage())
@@ -66,10 +67,6 @@ public class CommentService {
         commentRepository.memberDelete(userId);
     }
 
-    @Transactional
-    public void delteteByCommentId(Long commentId){
-        commentRepository.deleteById(commentId);
-    }
 
 
 

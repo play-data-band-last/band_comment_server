@@ -20,6 +20,7 @@ public class Comment {
     private Long memberId;
     private String memberImage;
     private String memberName;
+    @Builder.Default
     private Boolean isValid = Boolean.TRUE;
 
 }
