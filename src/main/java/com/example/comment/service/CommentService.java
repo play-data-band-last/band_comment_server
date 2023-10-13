@@ -5,6 +5,7 @@ import com.example.comment.domain.entity.Comment;
 import com.example.comment.domain.request.AlbumUpdateRequest;
 import com.example.comment.domain.request.CommentRequest;
 import com.example.comment.domain.request.UserUpdateRequest;
+import com.example.comment.kafka.dto.KafkaListnerDto;
 import com.example.comment.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,15 +48,15 @@ public class CommentService {
     }
 
     @Transactional
-    public void updateCommentMember(AlbumUpdateRequest albumUpdateRequest) throws Exception {
-        if (albumUpdateRequest.getMemberImage() != null && albumUpdateRequest.getMemberName() !=null ){
-            commentRepository.updateBoardMemberImageAndMemberName(albumUpdateRequest.getMemberName(), albumUpdateRequest.getMemberImage(), albumUpdateRequest.getMemberId());
+    public void updateCommentMember(KafkaListnerDto kafkaListnerDto) throws Exception {
+        if (kafkaListnerDto.getMemberImage() != null && kafkaListnerDto.getMemberName() !=null ){
+            commentRepository.updateBoardMemberImageAndMemberName(kafkaListnerDto.getMemberName(), kafkaListnerDto.getMemberImage(), kafkaListnerDto.getMemberId());
 
-        } else if (albumUpdateRequest.getMemberImage()!=null && albumUpdateRequest.getMemberName() ==null) {
-            commentRepository.updateBoardMemberImage(albumUpdateRequest.getMemberImage(),albumUpdateRequest.getMemberId());
+        } else if (kafkaListnerDto.getMemberImage()!=null && kafkaListnerDto.getMemberName() ==null) {
+            commentRepository.updateBoardMemberImage(kafkaListnerDto.getMemberImage(),kafkaListnerDto.getMemberId());
 
-        } else if (albumUpdateRequest.getMemberImage()==null && albumUpdateRequest.getMemberName() != null) {
-            commentRepository.updateBoardMemberName(albumUpdateRequest.getMemberName(), albumUpdateRequest.getMemberId());
+        } else if (kafkaListnerDto.getMemberImage()==null && kafkaListnerDto.getMemberName() != null) {
+            commentRepository.updateBoardMemberName(kafkaListnerDto.getMemberName(), kafkaListnerDto.getMemberId());
 
         } else {
             throw new Exception("NULL REQUEST");
