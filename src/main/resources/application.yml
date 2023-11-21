@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 34.42.237.145:9093
     consumer:
       auto-offset-reset: earliest
       group-id: album
@@ -13,9 +13,9 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
   datasource:
-    url: jdbc:mysql://localhost:3306/comment?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://34.42.237.145:3306/comment?serverTimezone=Asia/Seoul
     username: root
-    password: "[dhqclwoa12]"
+    password: 1234
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,17 +28,19 @@ spring:
 
 
 server:
-  port: 0
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,beans,refresh
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+  port: 8000
 
 
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,beans,refresh
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+#
+#
